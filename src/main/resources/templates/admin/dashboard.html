@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
+	th:replace="base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Admin dashboard</title>
+</head>
+<body>
+	<section
+		class="banner d-flex justify-content-center align-items-center">
+		<div th:object="${admin}">
+			<div th:if="${message}" th:classappend="${message.type}"
+				class="alert" role="alert">
+				<p class="text-center" th:text="${message.content}"></p>
+
+				<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+			</div>
+			<h1>Welcome, to admin dashboard</h1>
+			<h3>here we are going to use ECO-B app</h3>
+			<hr>
+			<h1>
+				Admin's contact number : <span th:text="${session.admin.contactNumber}"></span>
+			</h1>
+			<h1>
+				Admin's name : <span th:text="${session.admin.name}"></span>
+			</h1>
+			<!-- <p class="my-5">
+				<a href="" th:href="@{/admin/logout}" class="btn bg-primary btn-lg text-white">
+					Logout</a>
+			</p> -->
+			<h5>
+			<a href="" th:href="@{/admin/logout}" class="btn bg-primary btn-lg text-white">
+					Logout</a>
+			</h5>
+			<h1>
+				<a th:href="@{/admin/requests}" class="btn bg-primary btn-lg text-white">
+					Requests Received</a>
+			</h1>
+		</div>
+	</section>
+</body>
+</html>

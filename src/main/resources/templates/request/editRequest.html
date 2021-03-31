@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
+	th:replace="base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>in about page</title>
+</head>
+<body>
+	<section
+		class="banner d-flex justify-content-center align-items-center">
+		<div class="container">
+			<div class="row">
+
+
+				<div class="col-md-6 offset-md-3">
+
+					<div class="my-card mt-1">
+
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${session.message.content}"></p>
+
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+
+						<h1 class="text-center">Request a bicycle</h1>
+						<hr>
+						<!-- <h1>this is Add request page</h1> -->
+						<form th:action="@{/request/add}" method="post"
+							th:object="${request}">
+
+							<!-- contact number field -->
+							<div class="mb-3">
+
+								<label for="contact_number_field" class="form-label">Your
+									Contact Number</label> <input name="userId" type="tel"
+									class="form-control "
+									th:classappend="${#fields.hasErrors('userId') ? 'is-invalid':' '}"
+									id="contact_number_field" aria-describedby="emailHelp"
+									placeholder="Enter here" required th:value="${request.userId}" />
+
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('userId')}" th:text="${e}">
+								</div>
+
+							</div>
+
+							<!-- starting point field -->
+							<div class="mb-3">
+
+								<label for="starting_point_field" class="form-label">Starting
+									Point</label> <input name="startingPoint" type="text"
+									class="form-control"
+									th:classappend="${#fields.hasErrors('startingPoint') ? 'is-invalid':' '}"
+									id="starting_point_field" aria-describedby="emailHelp"
+									placeholder="Enter here" required
+									th:value="${request.startingPoint}" />
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('startingPoint')}" th:text="${e}">
+								</div>
+							</div>
+
+							<!-- ending point field -->
+							<div class="mb-3">
+
+								<label for="ending_point_field" class="form-label">Ending
+									Point</label> <input name="endingPoint" type="text"
+									class="form-control"
+									th:classappend="${#fields.hasErrors('endingPoint') ? 'is-invalid':' '}"
+									id="ending_point_field" aria-describedby="emailHelp"
+									placeholder="Enter here" required
+									th:value="${request.endingPoint}" />
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('endingPoint')}" th:text="${e}">
+								</div>
+							</div>
+
+							<!-- confirm password field -->
+							<!-- <div class="mb-3">
+    
+    						<label for="password_field" class="form-label">Confirm Password</label>
+    
+    						<input 
+    						name="confirmPassword"
+    						type="password" 
+    						class="form-control" 
+    						id="password_field" 
+    						aria-describedby="emailHelp"
+    						placeholder="Enter here"
+    						required
+    						/>
+    
+  							</div>  -->
+
+							<!-- role selector drop down -->
+							<!--<div class="input-group mb-3">
+  								<label class="form-control" for="role_field">Role</label>
+  								
+  								<input class="form-control" 
+  								id="role_field" 
+  								type="text"
+  								placeholder="USER"
+  								readonly>
+							</div>-->
+
+							<!-- terms and conditions -->
+							<!--<div class="form-group form-check">
+  								
+  								<input type="checkbox"
+  								name="agreement"
+  								class="form-check-input"
+  								id="agreement"
+  								/>  
+  								<label for="agreement">Accept terms and conditions</label>
+  															
+  							</div>-->
+
+							<!-- submit and reset buttons -->
+							<div class="container text-center">
+								<button type="submit" class="btn bg-primary text-white">Submit</button>
+								<button type="reset" class="btn btn-warning text-white">Reset</button>
+							</div>
+							<hr>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

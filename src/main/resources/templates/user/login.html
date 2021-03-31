@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
+	th:replace="base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Login page</title>
+</head>
+<body>
+	<section
+		class="banner d-flex justify-content-center align-items-center">
+		<div class="container">
+			<div class="row">
+
+
+				<div class="col-md-6 offset-md-3">
+
+					<div class="my-card mt-1">
+
+						<div th:if="${message}"
+							th:classappend="${message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${message.content}"></p>
+
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+
+						<h1 class="text-center">User Login</h1>
+
+						<form id="login-form" class="px-4 py-3"
+							th:action="@{/user/signin}" method="post" th:object="${user}">
+
+							<div th:if="${param.error}" class="alert alert-danger">
+								Invalid username and password</div>
+
+							<div th:if="${param.Logout}" class="alert alert-success">
+								You have been logged out</div>
+
+							<!-- contact number field -->
+							<div class="mb-3">
+								<label for="contact_number_field" class="form-label">Contact
+									Number</label> <input type="text" class="form-control"
+									name="contactNumber" id="contact_number_field"
+									placeholder="Enter here" th:value="${user.contactNumber}">
+							</div>
+							<!-- password field -->
+							<div class="mb-3">
+								<label for="password_field" class="form-label">Password</label>
+								<input type="password" class="form-control" id="password_field"
+									name="password" placeholder="Enter here" th:value="${user.password}">
+							</div>
+							<!-- remember me button field -->
+							<div class="mb-3">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input"
+										id="remember_me"> <label class="form-check-label"
+										for="remember_me"> Remember me </label>
+								</div>
+							</div>
+							<button type="submit" class="btn bg-primary text-white">Sign
+								in</button>
+						</form>
+						<div class="dropdown-divider"></div>
+						<!-- register director -->
+						<a class="dropdown-item" th:href="@{/signup/}">New around
+							here? Sign up</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

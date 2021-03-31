@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org"
+	th:replace="base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>in index page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+
+
+				<div class="col-md-12 ">
+
+					<div class="my-card mt-1">
+						<div class="card-body">
+							<div th:switch="${request}" class="container my-5">
+								<p class="my-5">
+									<a href="/request/add" class="btn bg-primary btn-lg text-white">
+										Request bicycle</a>
+								</p>
+								<div th:if="${session.message}"
+									th:classappend="${session.message.type}" class="alert"
+									role="alert">
+									<p class="text-center" th:text="${session.message.content}"></p>
+
+									<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+								</div>
+
+								<h1 class="text-center">Requests dashboard</h1>
+								<div class="col-md-10">
+									<h2 th:case="null">No Requests yet!</h2>
+									<div th:case="*">
+										<table class="table table-striped table-responsive-md">
+											<thead>
+												<tr>
+													<th>Sr. No.</th>
+													<th>User phone</th>
+													<th>starting</th>
+													<th>ending</th>
+													<th>request time</th>
+													<th>booked time</th>
+													<th>finish time</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="req : ${request}">
+													<td th:text="${req.requestId}"></td>
+													<td th:text="${req.userId}"></td>
+													<td th:text="${req.startingPoint}"></td>
+													<td th:text="${req.endingPoint}"></td>
+													<td th:text="${req.requestTime}"></td>
+													<td th:text="${req.bookedTime}"></td>
+													<td th:text="${req.finishTime}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
